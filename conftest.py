@@ -2,6 +2,7 @@
 import allure
 import pytest
 
+from pages.book_details_page import BookDetailsPage
 from pages.home_page import HomePage
 
 
@@ -9,6 +10,9 @@ from pages.home_page import HomePage
 def home_page(page) -> HomePage:
     return HomePage(page).load()
 
+@pytest.fixture
+def book_details_page(page) -> BookDetailsPage:
+    return BookDetailsPage(page)
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
