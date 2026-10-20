@@ -16,6 +16,7 @@ class HomePage(BasePage):
     BOOKS_SECTION = "ol.row"
     BOOK_ITEMS = "ol.row article.product_pod"
     BOOK_TITLE_LINK = "h3 a"
+    BOOK_PRICE = "p.price_color"
 
     def load(self) -> "HomePage":
      #Open the homepage and return self for chaining
@@ -57,3 +58,7 @@ class HomePage(BasePage):
         #click the book to open its details page
         logger.info("Opening book at position %s", index)
         self.book_items.nth(index).locator(self.BOOK_TITLE_LINK).click()
+
+
+    def get_book_price(self, index: int) -> str:
+        return self.book_items.nth(index).locator(self.BOOK_PRICE).inner_text()

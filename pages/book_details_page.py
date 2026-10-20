@@ -8,6 +8,7 @@ class BookDetailsPage(BasePage):
     TITLE = "div.product_main h1"
     PRODUCT_MAIN = "div.product_main"
     PRODUCT_INFO_TABLE = "table.table-striped"
+    PRICE = "div.product_main p.price_color"
 
     @property
     def title(self) -> Locator:
@@ -24,3 +25,9 @@ class BookDetailsPage(BasePage):
 
     def go_back(self) -> None:
         self.page.go_back()
+
+    def get_book_title(self) -> str:
+        return self.title.inner_text()
+
+    def get_price(self) -> str:
+        return self.page.locator(self.PRICE).inner_text()
