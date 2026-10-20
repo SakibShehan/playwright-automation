@@ -4,3 +4,4 @@ BOOKS_HOME_TITLE = "All products | Books to Scrape - Sandbox"
 BOOK_DETAILS_URL_PATTERN = r".*/catalogue/.+/index\.html"
 RANDOM_BOOK_COUNT = 5
 BOOKS_PER_PAGE = 20
+MAX_PAGINATION_PAGES = 5

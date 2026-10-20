@@ -17,6 +17,8 @@ class HomePage(BasePage):
     BOOK_ITEMS = "ol.row article.product_pod"
     BOOK_TITLE_LINK = "h3 a"
     BOOK_PRICE = "p.price_color"
+    IMAGES = "article.product_pod img"
+    NEXT_BUTTON = "li.next a"
 
     def load(self) -> "HomePage":
      #Open the homepage and return self for chaining
@@ -62,3 +64,25 @@ class HomePage(BasePage):
 
     def get_book_price(self, index: int) -> str:
         return self.book_items.nth(index).locator(self.BOOK_PRICE).inner_text()
+
+
+
+    def scan_images(self) -> dict:
+        images = self.page.locator(self.IMAGES)
+        details = []
+        for index in range(images.count()):
+            image = images.nth(index)
+            details.append({
+                "visible": image.is_visible(),
+                "src": image.get_attribute("src"),
+                "alt": image.get_attribute("alt"),
+                "class": image.get_attribute("class"),
+            })
+        return {"url": self.page.url, "images": details}
+
+    def has_next_page(self) -> bool:
+        return self.page.locator(self.NEXT_BUTTON).count() > 0
+
+    def go_to_next_page(self, page_number: int) -> None:
+        self.page.locator(self.NEXT_BUTTON).click()
+        self.page.wait_for_url(f"**/catalogue/page-{page_number}.html")
