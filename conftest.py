@@ -6,6 +6,7 @@ import pytest
 import config
 from pages.book_details_page import BookDetailsPage
 from pages.home_page import HomePage
+from pages.quotes_page import QuotesPage
 
 
 @pytest.fixture
@@ -18,7 +19,7 @@ def book_details_page(page) -> BookDetailsPage:
 
 @pytest.fixture(scope="module")
 def scanned_pages(browser) -> list[dict]:
-    
+
     #goes to 5 pages and keeps every image's details
     context = browser.new_context()
     home_page = HomePage(context.new_page()).load()
@@ -30,6 +31,13 @@ def scanned_pages(browser) -> list[dict]:
         home_page.go_to_next_page(page_number + 1)
     context.close()
     return results
+
+@pytest.fixture(scope="module")
+def quotes_page(browser) -> QuotesPage:
+    context = browser.new_context()
+    quotes_page = QuotesPage(context.new_page())
+    yield quotes_page
+    context.close()
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):

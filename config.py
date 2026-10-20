@@ -5,3 +5,7 @@ BOOK_DETAILS_URL_PATTERN = r".*/catalogue/.+/index\.html"
 RANDOM_BOOK_COUNT = 5
 BOOKS_PER_PAGE = 20
 MAX_PAGINATION_PAGES = 5
+QUOTES_BASE_URL = "https://quotes.toscrape.com/"
+QUOTES_USERNAME = "admin"
+QUOTES_PASSWORD = "admin"
+LOGIN_SUCCESS_STATUS = 302
